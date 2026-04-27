@@ -2,6 +2,21 @@
 
 A web app to browse SVG diagrams in a grid, view them full-size, and manage notes and publish flags.
 
+## Resources
+
+🚀 **Live**: (coming soon)
+📝 **Slides**: (coming soon)
+
+## Features
+
+- Browse SVG diagrams in a Masonry grid
+- Click to expand and view full-size
+- Add notes (memo) to each diagram
+- Track publish status with a checkbox
+- Search diagrams by title
+- Export / import notes as JSON
+- Dark mode support
+
 ## Tech Stack
 
 - React + TypeScript
@@ -40,5 +55,3 @@ diagram-notes/
 ## Deploy
 
 Automatically deployed to GitHub Pages via GitHub Actions on every push to `main`.
-
-URL: `www.kkoisland.com/diagram-notes/<id>/`
