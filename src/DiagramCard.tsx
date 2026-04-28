@@ -26,7 +26,10 @@ const DiagramCard = ({ diagram, onClick }: Props) => {
 						{diagram.title}
 					</p>
 					{diagram.published && (
-						<BadgeCheck size={18} className="text-[var(--accent)] shrink-0 mt-1" />
+						<BadgeCheck
+							size={18}
+							className="text-[var(--accent)] shrink-0 mt-1"
+						/>
 					)}
 				</div>
 				<p className="text-sm text-[var(--foreground)]/60">
