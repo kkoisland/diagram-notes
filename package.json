@@ -4,8 +4,9 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "tsc -b && vite build",
+		"dev": "tsx generate-diagrams.ts && vite",
+		"build": "tsx generate-diagrams.ts && tsc -b && vite build",
+		"generate": "tsx generate-diagrams.ts",
 		"preview": "vite preview",
 		"biome:check": "biome check .",
 		"biome:fix": "biome check --write .",
@@ -25,6 +26,7 @@
 		"@vitejs/plugin-react": "^6.0.1",
 		"globals": "^17.5.0",
 		"tailwindcss": "^4.2.4",
+		"tsx": "^4.21.0",
 		"typescript": "~6.0.2",
 		"vite": "^8.0.10"
 	}
