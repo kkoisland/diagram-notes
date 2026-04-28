@@ -8,6 +8,7 @@
 			"Bash(node:*)",
 			"Bash(rm:*)",
 			"Bash(cd:*)",
+			"Bash(ls:*)",
 			"Read",
 			"Write",
 			"Edit",
@@ -18,8 +19,7 @@
 			"Bash(git status:*)",
 			"Bash(git diff:*)"
 		],
-		"deny": ["EnterPlanMode"],
-		"additionalDirectories": ["/Users/keiko/Code/github/diagram-notes"]
+		"deny": ["EnterPlanMode"]
 	},
 	"additionalDirectories": ["/Users/keiko/Code/github/diagram-notes"]
 }
