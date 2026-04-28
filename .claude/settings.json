@@ -20,6 +20,5 @@
 			"Bash(git diff:*)"
 		],
 		"deny": ["EnterPlanMode"]
-	},
-	"additionalDirectories": ["/Users/keiko/Code/github/diagram-notes"]
+	}
 }
