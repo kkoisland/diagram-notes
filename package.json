@@ -4,7 +4,7 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "tsx generate-diagrams.ts && vite",
+		"dev": "tsx sync-diagrams.ts && tsx generate-diagrams.ts && vite",
 		"build": "tsx generate-diagrams.ts && tsc -b && vite build",
 		"generate": "tsx generate-diagrams.ts",
 		"preview": "vite preview",
