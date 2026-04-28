@@ -53,5 +53,5 @@ const diagrams = files.map((filename) => {
 	};
 });
 
-writeFileSync(OUTPUT, JSON.stringify(diagrams, null, 2));
+writeFileSync(OUTPUT, `${JSON.stringify(diagrams, null, "\t")}\n`);
 console.log(`Generated ${diagrams.length} diagrams → ${OUTPUT}`);
