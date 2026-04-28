@@ -1,9 +1,27 @@
 import { useEffect, useState } from "react";
+import Masonry from "react-masonry-css";
+import { Moon, Sun } from "lucide-react";
 import DiagramCard from "./DiagramCard";
 import type { Diagram } from "./types";
 
+const breakpointCols = {
+	default: 3,
+	1024: 2,
+	640: 1,
+};
+
 function App() {
 	const [diagrams, setDiagrams] = useState<Diagram[]>([]);
+	const [isDark, setIsDark] = useState(() => {
+		const saved = localStorage.getItem("diagram-notes:theme");
+		if (saved !== null) return saved === "dark";
+		return window.matchMedia("(prefers-color-scheme: dark)").matches;
+	});
+
+	useEffect(() => {
+		document.documentElement.classList.toggle("dark", isDark);
+		localStorage.setItem("diagram-notes:theme", isDark ? "dark" : "light");
+	}, [isDark]);
 
 	useEffect(() => {
 		fetch("/diagrams.json")
@@ -17,12 +35,30 @@ function App() {
 
 	return (
 		<div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-4">
-			<div className="columns-3 gap-4">
-				{diagrams.map((diagram) => (
-					<div key={diagram.filename} className="mb-4 break-inside-avoid">
-						<DiagramCard diagram={diagram} onClick={handleCardClick} />
-					</div>
-				))}
+			<div className="flex justify-end mb-4">
+				<button
+					type="button"
+					onClick={() => setIsDark((d) => !d)}
+					className="text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
+					aria-label="Toggle dark mode"
+				>
+					{isDark ? <Moon size={20} /> : <Sun size={20} />}
+				</button>
+			</div>
+			<div className="border-2 border-[#d8b4fe]">
+				<Masonry
+					breakpointCols={breakpointCols}
+					className="masonry-grid"
+					columnClassName="masonry-grid_column"
+				>
+					{diagrams.map((diagram) => (
+						<DiagramCard
+							key={diagram.filename}
+							diagram={diagram}
+							onClick={handleCardClick}
+						/>
+					))}
+				</Masonry>
 			</div>
 		</div>
 	);

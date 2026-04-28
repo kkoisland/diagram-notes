@@ -1,3 +1,4 @@
+import { BadgeCheck } from "lucide-react";
 import type { Diagram } from "./types";
 
 interface Props {
@@ -7,21 +8,32 @@ interface Props {
 
 const DiagramCard = ({ diagram, onClick }: Props) => {
 	return (
-		<button
-			type="button"
-			className="cursor-pointer rounded-lg border border-[var(--foreground)]/20 overflow-hidden hover:border-[var(--accent)] transition-colors w-full text-left"
-			onClick={() => onClick(diagram)}
-		>
-			<img src={diagram.path} alt={diagram.title} className="w-full block" />
-			<div className="p-3">
-				<p className="text-sm font-medium text-[var(--foreground)]">
-					{diagram.title}
-				</p>
-				<p className="text-xs text-[var(--foreground)]/60 mt-1">
+		<div className="border-2 border-[#d8b4fe] overflow-hidden w-full">
+			<button
+				type="button"
+				className="cursor-pointer w-full"
+				onClick={() => onClick(diagram)}
+			>
+				<img
+					src={diagram.path}
+					alt={diagram.title}
+					className="w-full block bg-white"
+				/>
+			</button>
+			<div className="px-3 pt-2 pb-0">
+				<div className="flex items-start justify-between gap-2">
+					<p className="text-lg font-medium text-[var(--foreground)] leading-tight">
+						{diagram.title}
+					</p>
+					{diagram.published && (
+						<BadgeCheck size={18} className="text-[var(--accent)] shrink-0 mt-1" />
+					)}
+				</div>
+				<p className="text-sm text-[var(--foreground)]/60">
 					{diagram.updatedAt}
 				</p>
 			</div>
-		</button>
+		</div>
 	);
 };
 
