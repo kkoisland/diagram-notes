@@ -18,7 +18,10 @@ const DiagramCard = ({ diagram, onClick, isSelected }: Props) => {
 	}, [isSelected]);
 
 	return (
-		<div ref={ref} className={`border-2 overflow-hidden w-full ${isSelected ? "border-[var(--accent)]" : "border-[var(--border)]"}`}>
+		<div
+			ref={ref}
+			className={`border-2 overflow-hidden w-full ${isSelected ? "border-[var(--accent)]" : "border-[var(--border)]"}`}
+		>
 			<button
 				type="button"
 				className="cursor-pointer w-full"
