@@ -62,6 +62,7 @@ function App() {
 									key={diagram.filename}
 									diagram={diagram}
 									onClick={setSelectedDiagram}
+									isSelected={diagram.filename === selectedDiagram?.filename}
 								/>
 							))}
 						</Masonry>

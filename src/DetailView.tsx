@@ -34,6 +34,17 @@ const DetailView = ({ diagram, onClose }: Props) => {
 					className="w-full bg-white"
 				/>
 			</div>
+			<div className="border-t-2 border-[var(--border)] p-4 flex flex-col gap-3">
+				<textarea
+					placeholder="Memo"
+					rows={3}
+					className="w-full text-sm bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded p-2 resize-none focus:outline-none focus:border-[var(--accent)]"
+				/>
+				<label className="flex items-center gap-2 text-sm text-[var(--foreground)] cursor-pointer">
+					<input type="checkbox" className="accent-[var(--accent)]" />
+					Published
+				</label>
+			</div>
 		</div>
 	);
 };

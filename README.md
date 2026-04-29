@@ -10,11 +10,12 @@ A web app to browse SVG diagrams in a grid, view them full-size, and manage note
 ## Features
 
 - Browse SVG diagrams in a responsive Masonry grid (3 → 2 → 1 columns)
+- Click to expand: split view with full-size SVG on the right and scrollable list on the left
+- Selected card highlighted and auto-scrolled into view in the side panel
 - Published indicator (badge) on cards for diagrams posted to Zenn / Medium
 - Dark mode toggle with system preference detection and localStorage persistence
-- Click to expand and view full-size (coming soon)
-- Add notes (memo) to each diagram (coming soon)
-- Search diagrams by title (coming soon)
+- Add notes (memo) and published flag to each diagram (UI ready, persistence coming soon)
+- Search and category filter (coming soon)
 - Export / import notes as JSON (coming soon)
 
 ## Tech Stack
