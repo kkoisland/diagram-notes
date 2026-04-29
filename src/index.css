@@ -5,12 +5,14 @@
 	--background: #ffffff;
 	--foreground: #1f2937;
 	--accent: #4f46e5;
+	--border: #cbd5e1;
 }
 
 .dark {
 	--background: #0f172a;
 	--foreground: #e2e8f0;
 	--accent: #818cf8;
+	--border: #94a3b8;
 }
 
 @theme inline {

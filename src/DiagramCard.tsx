@@ -8,7 +8,7 @@ interface Props {
 
 const DiagramCard = ({ diagram, onClick }: Props) => {
 	return (
-		<div className="border-2 border-[#d8b4fe] overflow-hidden w-full">
+		<div className="border-2 border-[var(--border)] overflow-hidden w-full">
 			<button
 				type="button"
 				className="cursor-pointer w-full"

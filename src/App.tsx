@@ -45,7 +45,7 @@ function App() {
 					{isDark ? <Moon size={20} /> : <Sun size={20} />}
 				</button>
 			</div>
-			<div className="border-2 border-[#d8b4fe]">
+			<div className="border-2 border-[var(--border)]">
 				<Masonry
 					breakpointCols={breakpointCols}
 					className="masonry-grid"

@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(git -C /Users/keiko/Code/github/diagram-notes remote -v)",
-      "Read(//Users/keiko/Code/github/react-confetti-playground/src/**)"
-    ]
-  }
-}
