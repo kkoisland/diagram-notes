@@ -4,6 +4,8 @@ export interface Diagram {
 	path: string;
 	updatedAt: string;
 	published?: boolean;
+	categories?: string[];
+	hidden?: boolean;
 }
 
 export interface DiagramNote {

@@ -1,14 +1,24 @@
+import { useEffect, useRef } from "react";
 import { BadgeCheck } from "lucide-react";
 import type { Diagram } from "./types";
 
 interface Props {
 	diagram: Diagram;
 	onClick: (diagram: Diagram) => void;
+	isSelected?: boolean;
 }
 
-const DiagramCard = ({ diagram, onClick }: Props) => {
+const DiagramCard = ({ diagram, onClick, isSelected }: Props) => {
+	const ref = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (isSelected && ref.current) {
+			ref.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+		}
+	}, [isSelected]);
+
 	return (
-		<div className="border-2 border-[var(--border)] overflow-hidden w-full">
+		<div ref={ref} className={`border-2 overflow-hidden w-full ${isSelected ? "border-[var(--accent)]" : "border-[var(--border)]"}`}>
 			<button
 				type="button"
 				className="cursor-pointer w-full"
