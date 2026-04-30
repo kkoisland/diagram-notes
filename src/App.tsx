@@ -14,6 +14,9 @@ const breakpointCols = {
 function App() {
 	const [diagrams, setDiagrams] = useState<Diagram[]>([]);
 	const [query, setQuery] = useState("");
+	const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
+		new Set(),
+	);
 	const importRef = useRef<HTMLInputElement>(null);
 	const [selectedDiagram, setSelectedDiagram] = useState<Diagram | null>(null);
 	const [isDark, setIsDark] = useState(() => {
@@ -81,9 +84,52 @@ function App() {
 		URL.revokeObjectURL(url);
 	};
 
-	const filteredDiagrams = diagrams.filter((d) =>
-		d.title.toLowerCase().includes(query.toLowerCase()),
-	);
+	const allCategories = Array.from(
+		new Set(diagrams.flatMap((d) => d.categories ?? [])),
+	).sort();
+
+	const toggleCategory = (cat: string) => {
+		setSelectedCategories((prev) => {
+			const next = new Set(prev);
+			if (next.has(cat)) next.delete(cat);
+			else next.add(cat);
+			return next;
+		});
+	};
+
+	const filteredDiagrams = diagrams
+		.filter((d) => !d.hidden)
+		.filter((d) => d.title.toLowerCase().includes(query.toLowerCase()))
+		.filter(
+			(d) =>
+				selectedCategories.size === 0 ||
+				d.categories?.some((c) => selectedCategories.has(c)),
+		);
+
+	const categoryFilter = (compact?: boolean) =>
+		allCategories.length > 0 && (
+			<div
+				className={`flex flex-wrap ${compact ? "gap-0.5 my-1" : "gap-1 my-2"}`}
+			>
+				<button
+					type="button"
+					onClick={() => setSelectedCategories(new Set())}
+					className={`border rounded-full transition-colors ${compact ? "px-1.5 py-0 text-xs" : "px-2 py-0.5 text-sm"} ${selectedCategories.size === 0 ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--border)] text-[var(--foreground)]/60 hover:text-[var(--foreground)]"}`}
+				>
+					すべて
+				</button>
+				{allCategories.map((cat) => (
+					<button
+						key={cat}
+						type="button"
+						onClick={() => toggleCategory(cat)}
+						className={`border rounded-full transition-colors ${compact ? "px-1.5 py-0 text-xs" : "px-2 py-0.5 text-sm"} ${selectedCategories.has(cat) ? "border-[var(--accent)] text-[var(--accent)]" : "border-[var(--border)] text-[var(--foreground)]/60 hover:text-[var(--foreground)]"}`}
+					>
+						{cat}
+					</button>
+				))}
+			</div>
+		);
 
 	const searchInput = (compact?: boolean) => (
 		<input
@@ -91,7 +137,7 @@ function App() {
 			placeholder="Search diagrams..."
 			value={query}
 			onChange={(e) => setQuery(e.target.value)}
-			className={`w-full bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] px-3 focus:outline-none focus:border-[var(--accent)] placeholder:text-[var(--foreground)]/40 ${compact ? "py-1 text-sm" : "py-2"}`}
+			className={`w-full bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-full px-4 focus:outline-none focus:border-[var(--accent)] placeholder:text-[var(--foreground)]/40 ${compact ? "py-1 text-sm" : "py-2"}`}
 		/>
 	);
 
@@ -148,6 +194,7 @@ function App() {
 				<div className="w-1/4 h-full overflow-y-auto border-r-2 border-[var(--border)] p-2">
 					<div className="flex justify-end mb-2">{headerButtons}</div>
 					{searchInput(true)}
+					{categoryFilter(true)}
 					<div className="border-2 border-[var(--border)]">
 						<Masonry
 							breakpointCols={2}
@@ -184,6 +231,7 @@ function App() {
 		<div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-4">
 			<div className="flex justify-end mb-4">{headerButtons}</div>
 			{searchInput()}
+			{categoryFilter()}
 			<div className="border-2 border-[var(--border)]">
 				<Masonry
 					breakpointCols={breakpointCols}

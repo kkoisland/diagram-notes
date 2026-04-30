@@ -39,7 +39,7 @@ const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
 					<p className="text-lg font-medium text-[var(--foreground)] leading-tight">
 						{diagram.title}
 					</p>
-					{(published ?? diagram.published) && (
+					{published && (
 						<BadgeCheck
 							size={18}
 							className="text-[var(--accent)] shrink-0 mt-1"
