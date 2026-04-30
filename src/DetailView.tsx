@@ -42,7 +42,7 @@ const DetailView = ({ diagram, onClose, note, onNoteChange }: Props) => {
 					rows={3}
 					value={note.memo}
 					onChange={(e) => onNoteChange({ ...note, memo: e.target.value })}
-					className="w-full text-sm bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded p-2 resize-none focus:outline-none focus:border-[var(--accent)]"
+					className="w-full text-sm bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded-xl p-2 resize-none focus:outline-none focus:border-[var(--accent)]"
 				/>
 				<label className="flex items-center gap-2 text-sm text-[var(--foreground)] cursor-pointer">
 					<input
