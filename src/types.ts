@@ -3,7 +3,6 @@ export interface Diagram {
 	filename: string;
 	path: string;
 	updatedAt: string;
-	published?: boolean;
 	categories?: string[];
 	hidden?: boolean;
 }
