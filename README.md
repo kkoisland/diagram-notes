@@ -14,9 +14,10 @@ A web app to browse SVG diagrams in a grid, view them full-size, and manage note
 - Selected card highlighted and auto-scrolled into view in the side panel
 - Published indicator (badge) on cards for diagrams posted to Zenn / Medium
 - Dark mode toggle with system preference detection and localStorage persistence
-- Add notes (memo) and published flag to each diagram (UI ready, persistence coming soon)
+- Add memo and published flag per diagram — auto-saved to localStorage
+- Export notes as `notes.json` (download button in the toolbar)
+- Import `notes.json` from another device (upload button in the toolbar)
 - Search and category filter (coming soon)
-- Export / import notes as JSON (coming soon)
 
 ## Tech Stack
 
