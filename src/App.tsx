@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Masonry from "react-masonry-css";
-import { Download, Moon, Sun } from "lucide-react";
+import { Download, Moon, Sun, Upload } from "lucide-react";
 import DiagramCard from "./DiagramCard";
 import DetailView from "./DetailView";
 import type { Diagram, DiagramNote } from "./types";
@@ -13,6 +13,7 @@ const breakpointCols = {
 
 function App() {
 	const [diagrams, setDiagrams] = useState<Diagram[]>([]);
+	const importRef = useRef<HTMLInputElement>(null);
 	const [selectedDiagram, setSelectedDiagram] = useState<Diagram | null>(null);
 	const [isDark, setIsDark] = useState(() => {
 		const saved = localStorage.getItem("diagram-notes:theme");
@@ -48,6 +49,25 @@ function App() {
 		setNotes((prev) => ({ ...prev, [filename]: note }));
 	};
 
+	const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (!file) return;
+		const reader = new FileReader();
+		reader.onload = (ev) => {
+			try {
+				const imported = JSON.parse(ev.target?.result as string) as Record<
+					string,
+					DiagramNote
+				>;
+				setNotes(imported);
+			} catch {
+				alert("Invalid notes.json");
+			}
+		};
+		reader.readAsText(file);
+		e.target.value = "";
+	};
+
 	const handleExport = () => {
 		const blob = new Blob([JSON.stringify(notes, null, 2)], {
 			type: "application/json",
@@ -70,11 +90,28 @@ function App() {
 
 	const headerButtons = (
 		<div className="flex items-center gap-3">
+			<input
+				ref={importRef}
+				type="file"
+				accept=".json"
+				className="hidden"
+				onChange={handleImport}
+			/>
+			<button
+				type="button"
+				onClick={() => importRef.current?.click()}
+				className="text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
+				aria-label="Import notes"
+				title="Import notes.json"
+			>
+				<Upload size={20} />
+			</button>
 			<button
 				type="button"
 				onClick={handleExport}
 				className="text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
 				aria-label="Export notes"
+				title="Export notes.json"
 			>
 				<Download size={20} />
 			</button>
@@ -83,6 +120,7 @@ function App() {
 				onClick={toggle}
 				className="text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
 				aria-label="Toggle dark mode"
+				title={isDark ? "Switch to light mode" : "Switch to dark mode"}
 			>
 				{isDark ? <Moon size={20} /> : <Sun size={20} />}
 			</button>
