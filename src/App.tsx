@@ -13,6 +13,7 @@ const breakpointCols = {
 
 function App() {
 	const [diagrams, setDiagrams] = useState<Diagram[]>([]);
+	const [query, setQuery] = useState("");
 	const importRef = useRef<HTMLInputElement>(null);
 	const [selectedDiagram, setSelectedDiagram] = useState<Diagram | null>(null);
 	const [isDark, setIsDark] = useState(() => {
@@ -80,13 +81,27 @@ function App() {
 		URL.revokeObjectURL(url);
 	};
 
+	const filteredDiagrams = diagrams.filter((d) =>
+		d.title.toLowerCase().includes(query.toLowerCase()),
+	);
+
+	const searchInput = (compact?: boolean) => (
+		<input
+			type="search"
+			placeholder="Search diagrams..."
+			value={query}
+			onChange={(e) => setQuery(e.target.value)}
+			className={`w-full bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] px-3 focus:outline-none focus:border-[var(--accent)] placeholder:text-[var(--foreground)]/40 ${compact ? "py-1 text-sm" : "py-2"}`}
+		/>
+	);
+
 	const getNote = (diagram: Diagram): DiagramNote => ({
 		memo: notes[diagram.filename]?.memo ?? "",
-		published: notes[diagram.filename]?.published ?? diagram.published ?? false,
+		published: notes[diagram.filename]?.published ?? false,
 	});
 
 	const getPublished = (diagram: Diagram): boolean =>
-		notes[diagram.filename]?.published ?? diagram.published ?? false;
+		notes[diagram.filename]?.published ?? false;
 
 	const headerButtons = (
 		<div className="flex items-center gap-3">
@@ -132,13 +147,14 @@ function App() {
 			<div className="flex h-screen bg-[var(--background)] text-[var(--foreground)]">
 				<div className="w-1/4 h-full overflow-y-auto border-r-2 border-[var(--border)] p-2">
 					<div className="flex justify-end mb-2">{headerButtons}</div>
+					{searchInput(true)}
 					<div className="border-2 border-[var(--border)]">
 						<Masonry
 							breakpointCols={2}
 							className="masonry-grid"
 							columnClassName="masonry-grid_column"
 						>
-							{diagrams.map((diagram) => (
+							{filteredDiagrams.map((diagram) => (
 								<DiagramCard
 									key={diagram.filename}
 									diagram={diagram}
@@ -167,13 +183,14 @@ function App() {
 	return (
 		<div className="min-h-screen bg-[var(--background)] text-[var(--foreground)] p-4">
 			<div className="flex justify-end mb-4">{headerButtons}</div>
+			{searchInput()}
 			<div className="border-2 border-[var(--border)]">
 				<Masonry
 					breakpointCols={breakpointCols}
 					className="masonry-grid"
 					columnClassName="masonry-grid_column"
 				>
-					{diagrams.map((diagram) => (
+					{filteredDiagrams.map((diagram) => (
 						<DiagramCard
 							key={diagram.filename}
 							diagram={diagram}
