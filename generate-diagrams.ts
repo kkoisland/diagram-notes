@@ -17,8 +17,9 @@ function toTitle(filename: string): string {
 }
 
 function toDate(filePath: string): string {
-	const mtime = statSync(filePath).mtime;
-	return mtime.toISOString().split("T")[0];
+	const stat = statSync(filePath);
+	const date = stat.birthtime.getTime() > 0 ? stat.birthtime : stat.mtime;
+	return date.toISOString().split("T")[0];
 }
 
 type Diagram = {
@@ -43,7 +44,7 @@ const files = readdirSync(DIAGRAMS_DIR)
 const diagrams = files.map((filename) => {
 	const filePath = join(DIAGRAMS_DIR, filename);
 	if (existing[filename]) {
-		return { ...existing[filename], updatedAt: toDate(filePath) };
+		return existing[filename];
 	}
 	return {
 		title: toTitle(filename),

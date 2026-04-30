@@ -6,9 +6,10 @@ interface Props {
 	diagram: Diagram;
 	onClick: (diagram: Diagram) => void;
 	isSelected?: boolean;
+	published?: boolean;
 }
 
-const DiagramCard = ({ diagram, onClick, isSelected }: Props) => {
+const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -38,7 +39,7 @@ const DiagramCard = ({ diagram, onClick, isSelected }: Props) => {
 					<p className="text-lg font-medium text-[var(--foreground)] leading-tight">
 						{diagram.title}
 					</p>
-					{diagram.published && (
+					{(published ?? diagram.published) && (
 						<BadgeCheck
 							size={18}
 							className="text-[var(--accent)] shrink-0 mt-1"

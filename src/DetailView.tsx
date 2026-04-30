@@ -1,12 +1,14 @@
 import { X } from "lucide-react";
-import type { Diagram } from "./types";
+import type { Diagram, DiagramNote } from "./types";
 
 interface Props {
 	diagram: Diagram;
 	onClose: () => void;
+	note: DiagramNote;
+	onNoteChange: (note: DiagramNote) => void;
 }
 
-const DetailView = ({ diagram, onClose }: Props) => {
+const DetailView = ({ diagram, onClose, note, onNoteChange }: Props) => {
 	return (
 		<div className="h-full flex flex-col bg-[var(--background)]">
 			<div className="flex justify-between items-center p-4 border-b-2 border-[var(--border)]">
@@ -38,10 +40,19 @@ const DetailView = ({ diagram, onClose }: Props) => {
 				<textarea
 					placeholder="Memo"
 					rows={3}
+					value={note.memo}
+					onChange={(e) => onNoteChange({ ...note, memo: e.target.value })}
 					className="w-full text-sm bg-[var(--background)] text-[var(--foreground)] border border-[var(--border)] rounded p-2 resize-none focus:outline-none focus:border-[var(--accent)]"
 				/>
 				<label className="flex items-center gap-2 text-sm text-[var(--foreground)] cursor-pointer">
-					<input type="checkbox" className="accent-[var(--accent)]" />
+					<input
+						type="checkbox"
+						checked={note.published}
+						onChange={(e) =>
+							onNoteChange({ ...note, published: e.target.checked })
+						}
+						className="accent-[var(--accent)]"
+					/>
 					Published
 				</label>
 			</div>
