@@ -4,28 +4,37 @@
 		"filename": "AI-CLI-Workflow.excalidraw.svg",
 		"path": "diagrams/AI-CLI-Workflow.excalidraw.svg",
 		"updatedAt": "2026-04-20",
-		"categories": ["AI", "LLM"]
+		"categories": [
+			"AI",
+			"LLM"
+		]
 	},
 	{
 		"title": "Addressbook architecture",
 		"filename": "Addressbook-architecture.excalidraw.svg",
 		"path": "diagrams/Addressbook-architecture.excalidraw.svg",
 		"updatedAt": "2026-04-30",
-		"categories": ["addressbook"]
+		"categories": [
+			"addressbook"
+		]
 	},
 	{
 		"title": "CI:CD Pipeline",
 		"filename": "CI:CD Pipeline.excalidraw.svg",
 		"path": "diagrams/CI:CD Pipeline.excalidraw.svg",
 		"updatedAt": "2026-04-30",
-		"categories": ["CI"]
+		"categories": [
+			"CI"
+		]
 	},
 	{
 		"title": "ExcalidrawEcosystem",
 		"filename": "ExcalidrawEcosystem.excalidraw.svg",
 		"path": "diagrams/ExcalidrawEcosystem.excalidraw.svg",
 		"updatedAt": "2026-04-30",
-		"categories": ["excalidraw"]
+		"categories": [
+			"excalidraw"
+		]
 	},
 	{
 		"title": "LLMApplicationArchitecture",

@@ -5,18 +5,13 @@ import DiagramCard from "./DiagramCard";
 import DetailView from "./DetailView";
 import type { Diagram, DiagramNote } from "./types";
 
-const breakpointCols = {
-	default: 3,
-	1024: 2,
-	640: 1,
-};
-
 function App() {
 	const [diagrams, setDiagrams] = useState<Diagram[]>([]);
 	const [query, setQuery] = useState("");
 	const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
 		new Set(),
 	);
+	const [cols, setCols] = useState(3);
 	const importRef = useRef<HTMLInputElement>(null);
 	const [selectedDiagram, setSelectedDiagram] = useState<Diagram | null>(null);
 	const [isDark, setIsDark] = useState(() => {
@@ -149,8 +144,25 @@ function App() {
 	const getPublished = (diagram: Diagram): boolean =>
 		notes[diagram.filename]?.published ?? false;
 
+	const colButtons = (
+		<div className="flex items-center gap-1">
+			{[1, 2, 3, 4, 5].map((n) => (
+				<button
+					key={n}
+					type="button"
+					onClick={() => setCols(n)}
+					className={`w-6 h-6 text-sm rounded transition-colors ${cols === n ? "text-[var(--accent)]" : "text-[var(--foreground)]/60 hover:text-[var(--foreground)]"}`}
+					title={`${n} column${n > 1 ? "s" : ""}`}
+				>
+					{n}
+				</button>
+			))}
+		</div>
+	);
+
 	const headerButtons = (
 		<div className="flex items-center gap-3">
+			{colButtons}
 			<input
 				ref={importRef}
 				type="file"
@@ -234,7 +246,7 @@ function App() {
 			{categoryFilter()}
 			<div className="border-2 border-[var(--border)]">
 				<Masonry
-					breakpointCols={breakpointCols}
+					breakpointCols={{ default: cols, 1024: Math.min(cols, 3), 640: 1 }}
 					className="masonry-grid"
 					columnClassName="masonry-grid_column"
 				>

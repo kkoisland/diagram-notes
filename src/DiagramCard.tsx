@@ -21,7 +21,7 @@ const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
 	return (
 		<div
 			ref={ref}
-			className={`border-2 overflow-hidden w-full ${isSelected ? "border-[var(--accent)]" : "border-[var(--border)]"}`}
+			className={`border-2 overflow-hidden w-full bg-white ${isSelected ? "border-[var(--accent)]" : "border-[var(--border)]"}`}
 		>
 			<button
 				type="button"
@@ -36,7 +36,7 @@ const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
 			</button>
 			<div className="px-3 pt-2 pb-0">
 				<div className="flex items-start justify-between gap-2">
-					<p className="text-lg font-medium text-[var(--foreground)] leading-tight">
+					<p className="text-lg font-medium text-gray-800 leading-tight">
 						{diagram.title}
 					</p>
 					{published && (
@@ -46,9 +46,7 @@ const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
 						/>
 					)}
 				</div>
-				<p className="text-sm text-[var(--foreground)]/60">
-					{diagram.updatedAt}
-				</p>
+				<p className="text-sm text-gray-500">{diagram.updatedAt}</p>
 			</div>
 		</div>
 	);
