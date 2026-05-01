@@ -4,7 +4,7 @@ A web app to browse SVG diagrams in a grid, view them full-size, and manage note
 
 ## Resources
 
-🚀 **Live**: (coming soon)
+🚀 **Live**: https://kkoisland.github.io/diagram-notes/
 📝 **Slides**: (coming soon)
 
 ## Features
