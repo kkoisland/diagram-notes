@@ -2,77 +2,77 @@
 	{
 		"title": "AI CLI Workflow",
 		"filename": "AI-CLI-Workflow.excalidraw.svg",
-		"path": "/diagrams/AI-CLI-Workflow.excalidraw.svg",
+		"path": "diagrams/AI-CLI-Workflow.excalidraw.svg",
 		"updatedAt": "2026-04-20",
 		"categories": ["AI", "LLM"]
 	},
 	{
 		"title": "Addressbook architecture",
 		"filename": "Addressbook-architecture.excalidraw.svg",
-		"path": "/diagrams/Addressbook-architecture.excalidraw.svg",
+		"path": "diagrams/Addressbook-architecture.excalidraw.svg",
 		"updatedAt": "2026-04-30",
 		"categories": ["addressbook"]
 	},
 	{
 		"title": "CI:CD Pipeline",
 		"filename": "CI:CD Pipeline.excalidraw.svg",
-		"path": "/diagrams/CI:CD Pipeline.excalidraw.svg",
+		"path": "diagrams/CI:CD Pipeline.excalidraw.svg",
 		"updatedAt": "2026-04-30",
 		"categories": ["CI"]
 	},
 	{
 		"title": "ExcalidrawEcosystem",
 		"filename": "ExcalidrawEcosystem.excalidraw.svg",
-		"path": "/diagrams/ExcalidrawEcosystem.excalidraw.svg",
+		"path": "diagrams/ExcalidrawEcosystem.excalidraw.svg",
 		"updatedAt": "2026-04-30",
 		"categories": ["excalidraw"]
 	},
 	{
 		"title": "LLMApplicationArchitecture",
 		"filename": "LLMApplicationArchitecture.excalidraw.svg",
-		"path": "/diagrams/LLMApplicationArchitecture.excalidraw.svg",
+		"path": "diagrams/LLMApplicationArchitecture.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "MapArchitecture",
 		"filename": "MapArchitecture.excalidraw.svg",
-		"path": "/diagrams/MapArchitecture.excalidraw.svg",
+		"path": "diagrams/MapArchitecture.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "Control chrome",
 		"filename": "control-chrome.excalidraw.svg",
-		"path": "/diagrams/control-chrome.excalidraw.svg",
+		"path": "diagrams/control-chrome.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "Git fork workflow",
 		"filename": "git-fork-workflow.excalidraw.svg",
-		"path": "/diagrams/git-fork-workflow.excalidraw.svg",
+		"path": "diagrams/git-fork-workflow.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "Slides slidev",
 		"filename": "slides-slidev.excalidraw.svg",
-		"path": "/diagrams/slides-slidev.excalidraw.svg",
+		"path": "diagrams/slides-slidev.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "Stable context map",
 		"filename": "stable-context-map.excalidraw.svg",
-		"path": "/diagrams/stable-context-map.excalidraw.svg",
+		"path": "diagrams/stable-context-map.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "Stable context map2",
 		"filename": "stable-context-map2.excalidraw.svg",
-		"path": "/diagrams/stable-context-map2.excalidraw.svg",
+		"path": "diagrams/stable-context-map2.excalidraw.svg",
 		"updatedAt": "2026-04-30"
 	},
 	{
 		"title": "Testfile1",
 		"filename": "testfile1.excalidraw.svg",
-		"path": "/diagrams/testfile1.excalidraw.svg",
+		"path": "diagrams/testfile1.excalidraw.svg",
 		"hidden": true,
 		"updatedAt": "2026-04-30"
 	}

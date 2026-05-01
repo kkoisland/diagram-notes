@@ -49,7 +49,7 @@ const diagrams = files.map((filename) => {
 	return {
 		title: toTitle(filename),
 		filename,
-		path: `/diagrams/${filename}`,
+		path: `diagrams/${filename}`,
 		updatedAt: toDate(filePath),
 	};
 });

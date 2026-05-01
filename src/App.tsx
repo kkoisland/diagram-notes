@@ -38,7 +38,7 @@ function App() {
 	}, [isDark]);
 
 	useEffect(() => {
-		fetch("/diagrams.json")
+		fetch(`${import.meta.env.BASE_URL}diagrams.json`)
 			.then((r) => r.json())
 			.then(setDiagrams);
 	}, []);
