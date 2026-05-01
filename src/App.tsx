@@ -12,6 +12,7 @@ function App() {
 		new Set(),
 	);
 	const [cols, setCols] = useState(3);
+	const [sortOrder, setSortOrder] = useState<"newest" | "oldest">("newest");
 	const importRef = useRef<HTMLInputElement>(null);
 	const [selectedDiagram, setSelectedDiagram] = useState<Diagram | null>(null);
 	const [isDark, setIsDark] = useState(() => {
@@ -46,6 +47,16 @@ function App() {
 
 	const handleNoteChange = (filename: string, note: DiagramNote) => {
 		setNotes((prev) => ({ ...prev, [filename]: note }));
+	};
+
+	const handleToggleDone = (diagram: Diagram) => {
+		setNotes((prev) => ({
+			...prev,
+			[diagram.id]: {
+				memo: prev[diagram.id]?.memo ?? "",
+				done: !(prev[diagram.id]?.done ?? false),
+			},
+		}));
 	};
 
 	const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +110,11 @@ function App() {
 			(d) =>
 				selectedCategories.size === 0 ||
 				d.categories?.some((c) => selectedCategories.has(c)),
+		)
+		.sort((a, b) =>
+			sortOrder === "newest"
+				? b.createdAt.localeCompare(a.createdAt)
+				: a.createdAt.localeCompare(b.createdAt),
 		);
 
 	const categoryFilter = (compact?: boolean) =>
@@ -137,12 +153,12 @@ function App() {
 	);
 
 	const getNote = (diagram: Diagram): DiagramNote => ({
-		memo: notes[diagram.filename]?.memo ?? "",
-		published: notes[diagram.filename]?.published ?? false,
+		memo: notes[diagram.id]?.memo ?? "",
+		done: notes[diagram.id]?.done ?? false,
 	});
 
-	const getPublished = (diagram: Diagram): boolean =>
-		notes[diagram.filename]?.published ?? false;
+	const getDone = (diagram: Diagram): boolean =>
+		notes[diagram.id]?.done ?? false;
 
 	const colButtons = (
 		<div className="flex items-center gap-1">
@@ -157,6 +173,18 @@ function App() {
 					{n}
 				</button>
 			))}
+			<button
+				type="button"
+				onClick={() =>
+					setSortOrder((s) => (s === "newest" ? "oldest" : "newest"))
+				}
+				className="ml-1 text-sm text-[var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
+				title={
+					sortOrder === "newest" ? "Sort: newest first" : "Sort: oldest first"
+				}
+			>
+				{sortOrder === "newest" ? "↓" : "↑"}
+			</button>
 		</div>
 	);
 
@@ -219,7 +247,8 @@ function App() {
 									diagram={diagram}
 									onClick={setSelectedDiagram}
 									isSelected={diagram.filename === selectedDiagram?.filename}
-									published={getPublished(diagram)}
+									done={getDone(diagram)}
+									onToggleDone={() => handleToggleDone(diagram)}
 								/>
 							))}
 						</Masonry>
@@ -230,9 +259,7 @@ function App() {
 						diagram={selectedDiagram}
 						onClose={() => setSelectedDiagram(null)}
 						note={getNote(selectedDiagram)}
-						onNoteChange={(note) =>
-							handleNoteChange(selectedDiagram.filename, note)
-						}
+						onNoteChange={(note) => handleNoteChange(selectedDiagram.id, note)}
 					/>
 				</div>
 			</div>
@@ -255,7 +282,8 @@ function App() {
 							key={diagram.filename}
 							diagram={diagram}
 							onClick={setSelectedDiagram}
-							published={getPublished(diagram)}
+							done={getDone(diagram)}
+							onToggleDone={() => handleToggleDone(diagram)}
 						/>
 					))}
 				</Masonry>

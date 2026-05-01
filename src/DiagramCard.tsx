@@ -6,10 +6,17 @@ interface Props {
 	diagram: Diagram;
 	onClick: (diagram: Diagram) => void;
 	isSelected?: boolean;
-	published?: boolean;
+	done?: boolean;
+	onToggleDone?: () => void;
 }
 
-const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
+const DiagramCard = ({
+	diagram,
+	onClick,
+	isSelected,
+	done,
+	onToggleDone,
+}: Props) => {
 	const ref = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -39,14 +46,26 @@ const DiagramCard = ({ diagram, onClick, isSelected, published }: Props) => {
 					<p className="text-lg font-medium text-gray-800 leading-tight">
 						{diagram.title}
 					</p>
-					{published && (
+					<button
+						type="button"
+						onClick={(e) => {
+							e.stopPropagation();
+							onToggleDone?.();
+						}}
+						className="shrink-0 mt-1"
+						aria-label="Toggle done"
+					>
 						<BadgeCheck
 							size={18}
-							className="text-[var(--accent)] shrink-0 mt-1"
+							className={
+								done
+									? "text-[var(--accent)]"
+									: "text-[var(--foreground)]/20 hover:text-[var(--foreground)]/40"
+							}
 						/>
-					)}
+					</button>
 				</div>
-				<p className="text-sm text-gray-500">{diagram.updatedAt}</p>
+				<p className="text-sm text-gray-500">{diagram.createdAt}</p>
 			</div>
 		</div>
 	);

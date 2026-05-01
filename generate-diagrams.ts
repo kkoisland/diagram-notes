@@ -6,14 +6,18 @@ import {
 	writeFileSync,
 } from "node:fs";
 import { join } from "node:path";
+import { randomUUID } from "node:crypto";
+import { execSync } from "node:child_process";
 
 const DIAGRAMS_DIR = "./public/diagrams";
 const OUTPUT = "./public/diagrams.json";
 
 function toTitle(filename: string): string {
 	const base = filename.replace(".excalidraw.svg", "");
-	const spaced = base.replace(/-/g, " ");
-	return spaced.charAt(0).toUpperCase() + spaced.slice(1);
+	return base
+		.split("-")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
 }
 
 function toDate(filePath: string): string {
@@ -23,10 +27,13 @@ function toDate(filePath: string): string {
 }
 
 type Diagram = {
+	id: string;
 	title: string;
 	filename: string;
 	path: string;
-	updatedAt: string;
+	createdAt: string;
+	categories?: string[];
+	hidden?: boolean;
 };
 
 const existing: Record<string, Diagram> = {};
@@ -44,15 +51,24 @@ const files = readdirSync(DIAGRAMS_DIR)
 const diagrams = files.map((filename) => {
 	const filePath = join(DIAGRAMS_DIR, filename);
 	if (existing[filename]) {
-		return existing[filename];
+		const { updatedAt: legacyDate, ...rest } = existing[filename] as Diagram & {
+			updatedAt?: string;
+		};
+		return {
+			...rest,
+			id: rest.id ?? randomUUID(),
+			createdAt: rest.createdAt ?? legacyDate ?? toDate(filePath),
+		};
 	}
 	return {
+		id: randomUUID(),
 		title: toTitle(filename),
 		filename,
 		path: `diagrams/${filename}`,
-		updatedAt: toDate(filePath),
+		createdAt: toDate(filePath),
 	};
 });
 
 writeFileSync(OUTPUT, `${JSON.stringify(diagrams, null, "\t")}\n`);
+execSync(`pnpm exec biome format --write ${OUTPUT}`, { stdio: "ignore" });
 console.log(`Generated ${diagrams.length} diagrams → ${OUTPUT}`);

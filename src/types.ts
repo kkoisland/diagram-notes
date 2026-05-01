@@ -1,13 +1,14 @@
 export interface Diagram {
+	id: string;
 	title: string;
 	filename: string;
 	path: string;
-	updatedAt: string;
+	createdAt: string;
 	categories?: string[];
 	hidden?: boolean;
 }
 
 export interface DiagramNote {
 	memo: string;
-	published: boolean;
+	done: boolean;
 }

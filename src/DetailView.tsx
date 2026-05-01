@@ -17,7 +17,7 @@ const DetailView = ({ diagram, onClose, note, onNoteChange }: Props) => {
 						{diagram.title}
 					</p>
 					<p className="text-sm text-[var(--foreground)]/60">
-						{diagram.updatedAt}
+						{diagram.createdAt}
 					</p>
 				</div>
 				<button
@@ -47,13 +47,11 @@ const DetailView = ({ diagram, onClose, note, onNoteChange }: Props) => {
 				<label className="flex items-center gap-2 text-sm text-[var(--foreground)] cursor-pointer">
 					<input
 						type="checkbox"
-						checked={note.published}
-						onChange={(e) =>
-							onNoteChange({ ...note, published: e.target.checked })
-						}
+						checked={note.done}
+						onChange={(e) => onNoteChange({ ...note, done: e.target.checked })}
 						className="accent-[var(--accent)]"
 					/>
-					Published
+					Done
 				</label>
 			</div>
 		</div>
