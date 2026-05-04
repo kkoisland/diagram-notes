@@ -60,7 +60,7 @@ const DiagramCard = ({
 							className={
 								done
 									? "text-[var(--accent)]"
-									: "text-[var(--foreground)]/20 hover:text-[var(--foreground)]/40"
+									: "text-gray-300 hover:text-gray-400"
 							}
 						/>
 					</button>
